@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 투두 리스트</title>
+    <style>
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        #list {
+            padding: 20px;
+        }
+
+        .val {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .val h2 {
+            margin: 0;
+        }
+
+        .delete-btn {
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>나의 투두 리스트</h1>
+        <button id="create">만들기</button>
+    </header>
+    
+    <div id="list"></div>
+
+    <script>
+        const create = document.getElementById('create');
+        const list = document.getElementById('list');
+
+        create.addEventListener('click', () => {
+            const title = prompt('할일을 입력해주세요: ');
+            const date = new Date().toLocaleDateString();
+
+            if (title) {
+                const val = document.createElement('div');
+                val.classList.add('val');
+                val.innerHTML = `
+                    <div>
+                        <h2>${title}</h2>
+                        <p>${date}</p>
+                    </div>
+                    <button class="delete-btn">삭제</button>
+                `;
+                list.appendChild(val);
+
+                // 삭제 버튼 클릭 이벤트 추가
+                val.querySelector('.delete-btn').addEventListener('click', () => {
+                    list.removeChild(val);
+                });
+            } else {
+                alert('제목을 확인헤주세요!');
+            }
+        });
+    </script>
+</body>
+</html>
